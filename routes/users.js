@@ -51,14 +51,14 @@ router.post('/', (request, response) => {
 // GET /users/:id SHOW a single user
 
 router.get('/:id', (request, response) => {
-  // console.log(request.params);
   knex('users')
     .where({
       id: request.params.id
     })
     .first()
-    .then((userFromDB) => {
+    .then((userFromDb) => {
       response.render('users/show', {
+        pageTitle: 'Show User ' + request.params.id,
         userOnView: userFromDb
       });
     })
@@ -79,8 +79,9 @@ router.get('/:id/edit', (request, response) => {
       id: request.params.id
     })
     .first()
-    .then((userFromDB) => {
+    .then((userFromDb) => {
       response.render('users/edit', {
+        pageTitle: 'Edit User ' + request.params.id,
         userOnView: userFromDb
       });
     })
@@ -95,14 +96,43 @@ router.get('/:id/edit', (request, response) => {
 // PATCH/PUT /users/:id UPDATE a single user
 
 router.patch('/:id', (request, response) => {
-
+  // console.log(request.params);
+  knex('users')
+    .where({
+      id: request.params.id
+    })
+    .first()
+    .update({
+      email: request.body.user.email
+    })
+    .then(() => {
+      response.redirect('/users');
+    })
+    .catch((errorFromServer) => {
+      console.error("error: ", errorFromServer);
+      response.render('error', {
+        errorOnView: errorFromServer
+      });
+    });
 });
 
 // DELETE /users/:id DELETE a single user
 
 router.delete('/:id', (request, response) => {
-
+  knex('users')
+    .where({
+      id: request.params.id
+    })
+    .del()
+    .then(() => {
+      response.redirect('/users');
+    })
+    .catch((errorFromServer) => {
+      console.error("error: ", errorFromServer);
+      response.render('error', {
+        errorOnView: errorFromServer
+      });
+    });
 });
 
 module.exports = router;
-ports = router;

@@ -1,0 +1,45 @@
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+    <div class="jumbotron">
+      <h1>SHOW USER <%= userOnView.email %></h1>
+    </div>
+<table>
+
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </tr>
+      <tr>
+        <td><%= userOnView.id %></td>
+        <td><%= userOnView.email %></td>
+
+        <td><a href="/users/<%= userOnView.id %>/edit">Edit</a></td>
+        <td>
+          <form action='/users/<%= userOnView.id %>?_method=DELETE' method='POST'>
+            <input type='submit' value='Delete'>
+          </form>
+        </td>
+      </tr>
+  </table>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+
+</html>

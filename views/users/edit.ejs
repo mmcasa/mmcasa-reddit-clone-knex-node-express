@@ -1,0 +1,29 @@
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+    <div class="jumbotron">
+      <h1>Edit user: <%= userOnView.email %></h1>
+    </div>
+    <form action='/users/<%= userOnView.id %>?_method=PATCH' method='POST'>
+      <input type="email" name="user[email]" placeholder="juanita.dole@mail.com" value="<%= userOnView.email %>"/>
+      <input type="submit" value="Edit this user" />
+    </form>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+
+</html>
