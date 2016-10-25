@@ -8,6 +8,9 @@ module.exports = {
     debug: false,
     migrations: {
       directory: './migrations'
+    },
+    seeds: {
+      directory: './seeds/development'
     }
   },
 
@@ -17,6 +20,9 @@ module.exports = {
     debug: false,
     migrations: {
       directory: './migrations'
+    },
+    seeds: {
+      directory: './seeds/test'
     }
   },
 
@@ -25,6 +31,9 @@ module.exports = {
     connection: 'postgres://localhost/reddit_clone_prod',
     migrations: {
       directory: './migrations'
+    },
+    seeds: {
+      directory: './seeds/production'
     }
   }
 
