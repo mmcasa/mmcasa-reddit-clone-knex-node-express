@@ -5,7 +5,6 @@ module.exports = {
   development: {
     client: 'pg',
     connection: 'postgres://localhost/reddit_clone_dev',
-    debug: false,
     migrations: {
       directory: './migrations'
     },
@@ -17,7 +16,6 @@ module.exports = {
   test: {
     client: 'pg',
     connection: 'postgres://localhost/reddit_clone_test',
-    debug: false,
     migrations: {
       directory: './migrations'
     },
@@ -27,7 +25,6 @@ module.exports = {
   },
 
   production: {
-    client: 'pg',
     connection: 'postgres://localhost/reddit_clone_prod',
     migrations: {
       directory: './migrations'
