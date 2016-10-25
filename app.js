@@ -1,12 +1,11 @@
 'use strict'
 
 const express = require('express');
+const app = express();
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const routes = require('./routes')
-
-const app = express();
 
 
 app.set('view engine', 'ejs');
@@ -15,7 +14,7 @@ app.use(morgan('tiny'))
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 
 
 // allowing routes to connect to other routes
