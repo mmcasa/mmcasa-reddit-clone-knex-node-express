@@ -4,11 +4,6 @@ const router = express.Router({
 });
 const knex = require("../knex");
 
-router.all('*', (request, response) => {
-  const userOnViewId = request.params.user_id;
-})
-
-
 // /users/:user_id/posts
 // INDEX for all the posts FOR A SPECIFIC USER
 router.get('/', (request, response) => {
@@ -92,8 +87,7 @@ router.get('/:id', (request, response) => {
 router.get('/:id/edit', (request, response) => {
   knex('posts')
     .where({
-      user_id: userOnViewId,
-      // user_id: request.params.user_id,
+      user_id: request.params.user_id,
       id: request.params.id
     })
     .first()
@@ -116,13 +110,44 @@ router.get('/:id/edit', (request, response) => {
 // /users/:user_id/posts
 // UPDATES posts FOR A SPECIFIC USER
 router.patch('/:id', (request, response) => {
-
+  knex('posts')
+    .where({
+      id: request.params.id,
+      user_id: request.params.user_id
+    })
+    .first()
+    .update({
+      title: request.body.post.title,
+      content: request.body.post.content
+    })
+    .then(() => {
+      response.redirect('/users/' + request.params.user_id + '/posts')
+    })
+    .catch((errorFromServer) => {
+      console.error("error: ", errorFromServer);
+      response.render('error', {
+        errorOnView: errorFromServer
+      });
+    });
 });
 
 // /users/:user_id/posts
 // DELETES posts FOR A SPECIFIC USER
 router.delete('/:id', (request, response) => {
-
+  knex('posts')
+    .where({
+      id: request.params.id,
+    })
+    .del()
+    .then(() => {
+      response.redirect('/users/' + request.params.user_id + '/posts');
+    })
+    .catch((errorFromServer) => {
+      console.error("error: ", errorFromServer);
+      response.render('error', {
+        errorOnView: errorFromServer
+      });
+    });
 });
 
 module.exports = router;
