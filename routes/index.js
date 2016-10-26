@@ -3,12 +3,12 @@
 
 const main = require('./main');
 const users = require('./users');
-// const posts = require('./posts');
+const posts = require('./posts');
 // const comments = require('./comments');
 
 module.exports = {
   main,
-  users
+  users,
+  posts
   //   comments,
-  //   posts,
 }

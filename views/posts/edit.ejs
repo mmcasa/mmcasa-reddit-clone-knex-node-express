@@ -1,0 +1,30 @@
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+    <div class="jumbotron">
+      <h1>Edit post: <%= postOnView.title %></h1>
+    </div>
+    <form action='/users/<%= postOnView.id %>?_method=PATCH' method='POST'>
+      <input type="text" name="post[text]" placeholder="Title" value="<%= postOnView.text %>"/>
+      <input type="textarea" name="post[content]" placeholder="Content" value="<%= postOnView.content %>"/>
+      <input type="submit" value="Edit this post" />
+    </form>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+
+</html>

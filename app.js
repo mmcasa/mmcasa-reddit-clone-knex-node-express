@@ -21,7 +21,7 @@ app.use(methodOverride("_method"));
 
 app.use('/', routes.main);
 app.use('/users', routes.users);
-// app.use('/users/:user_id/posts', routes.posts);
+app.use('/users/:user_id/posts', routes.posts);
 // app.use('/posts/:post_id/comments', routes.comments);
 
 
