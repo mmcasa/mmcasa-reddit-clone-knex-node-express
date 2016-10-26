@@ -1,0 +1,56 @@
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+    <div class="jumbotron">
+      <h1>SHOW Comment <%= commentOnView.id %></h1>
+    </div>
+    <table>
+
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>content</th>
+          <th>user_id</th>
+          <th>post_id</th>
+          <th>edit</th>
+          <th>delete</th>
+        </tr>
+        <tr>
+          <td>
+            <%= commentOnView.id %>
+          </td>
+          <td>
+            <%= commentOnView.content %>
+          </td>
+          <td>
+            <%= commentOnView.user_id %>
+          </td>
+          <td>
+            <%= commentOnView.post_id %>
+          </td>
+          <td><a href="/posts/<%= postOnViewId %>/comments/<%= commentOnView.id %>/edit">Edit</a></td>
+          <td>
+            <form action='/posts/<%= postOnViewId %>/comments/<%= commentOnView.id %>?_method=DELETE' method='POST'>
+              <input type='submit' value='Delete'>
+            </form>
+          </td>
+        </tr>
+      </table>
+
+      <footer>
+        <% include ../partials/footer %>
+      </footer>
+
+</body>
+
+</html>

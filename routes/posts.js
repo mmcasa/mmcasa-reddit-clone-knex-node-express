@@ -31,9 +31,15 @@ router.get('/', (request, response) => {
 // SHOW form to create a new post FOR A SPECIFIC USER
 router.get('/new', (request, response) => {
   response.render('posts/new', {
-    pageTitle: 'Write new post',
-    userOnViewId: request.params.user_id
-  });
+      pageTitle: 'Write new post',
+      userOnViewId: request.params.user_id
+    })
+    .catch((errorFromServer) => {
+      console.error("error: ", errorFromServer);
+      response.render('error', {
+        errorOnView: errorFromServer
+      });
+    });
 });
 
 // /users/:user_id/posts/new
@@ -107,7 +113,7 @@ router.get('/:id/edit', (request, response) => {
     });
 });
 
-// /users/:user_id/posts
+// /users/:user_id/posts/:id
 // UPDATES posts FOR A SPECIFIC USER
 router.patch('/:id', (request, response) => {
   knex('posts')
