@@ -12,7 +12,7 @@ router.get("/", (request, response) => {
 
 router.get("/posts", (request, response) => {
   // response.send("root page");
-  response.render('index', {
+  response.render('posts/index', {
     pageTitle: 'Posts for User ' + request.params.user_id
   });
 });
