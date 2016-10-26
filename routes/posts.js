@@ -6,14 +6,31 @@ const knex = require("../knex");
 
 // /users/:user_id/posts
 // INDEX for all the posts FOR A SPECIFIC USER
-router.get('/', (request, response) => {
-  console.log(request.params);
-  knex('posts')
-    .where({
-      user_id: request.params.user_id
+router.post('/', (request, response) => {
+  console.log(request.body.user.email);
+  knex('users')
+    .insert({
+      email: request.body.user.email
     })
-    .then((postsFromDb) => {
-      response.render('posts/index', {
+    .then(() => {
+      response.redirect('posts')
+    })
+    .catch((errorFromServer) => {
+      console.error("error: ", errorFromServer);
+      response.render('error', {
+        errorOnView: errorFromServer
+      });
+    });
+});
+// /users/:user_id/posts/new
+// CREATE a post FOR A SPECIFIC USER
+router.get('/new', (request, response) => {
+    knex('posts')
+    .insert({
+      user_id: request.params.id
+    })
+    .then((postsFromDb) =>{
+      response.redirect('posts/new', {
         pageTitle: 'Posts for User ' + request.params.user_id,
         userOnViewId: request.params.user_id,
         postsOnView: postsFromDb
@@ -25,12 +42,6 @@ router.get('/', (request, response) => {
         errorOnView: errorFromServer
       });
     });
-});
-
-// /users/:user_id/posts/new
-// CREATE a post FOR A SPECIFIC USER
-router.get('/new', (request, response) => {
-
 });
 
 // /users/:user_id/posts/:id

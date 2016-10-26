@@ -1,0 +1,29 @@
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+    <div class="jumbotron">
+      <h1>Add a Post <%= userOnViewId %></h1>
+    </div>
+    <form action="/posts" method="POST">
+      <input type="textarea" name="user[email]" placeholder="write post here"/>
+      <input type="submit" value="Add this post" />
+    </form>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+
+</html>
